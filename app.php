@@ -17,12 +17,16 @@ function execute(string $command, string $argument)
 {
     $config = require 'config.php';
 
-    $repository = new \Acme\SqlStaffRepository(new \PDO(
-        $config['database']['connection'],
-        $config['database']['username'],
-        $config['database']['password'],
-        $config['database']['options']
-    ), 'staff');
+    try {
+        $repository = new \Acme\SqlStaffRepository(new \PDO(
+            $config['database']['connection'] ?? '',
+            $config['database']['username'] ?? null,
+            $config['database']['password'] ?? null,
+            $config['database']['options'] ?? null
+        ), 'staff');
+    } catch (\PDOException $e) {
+        exit("Failed to connect database.\n");
+    }
 
     $controller = new \Acme\StaffController($repository);
 
