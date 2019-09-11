@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-function view($name, array $data = [])
+function view(string $name, array $data = [])
 {
     extract($data);
     return require __DIR__ . '/src/views/' . $name .'.php';
@@ -13,7 +13,8 @@ if ($argc !== 3) {
     exit(1);
 }
 
-function execute(string $command, string $argument) {
+function execute(string $command, string $argument)
+{
     $config = require 'config.php';
 
     $repository = new \Acme\SqlStaffRepository(new \PDO(

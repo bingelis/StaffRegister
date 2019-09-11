@@ -20,7 +20,7 @@ class SqlStaffRepository implements StaffRepositoryInterface
         }
 
         if (!!$this->matchBy(['email' => $person->email])) {
-            throw new UserStorageException(sprintf('Email value "%s" is not unque.', $person->email));
+            throw new UserStorageException(sprintf('Email value "%s" is not unique.', $person->email));
         }
 
         $properties = $person->properties();
@@ -37,7 +37,7 @@ class SqlStaffRepository implements StaffRepositoryInterface
 
             return !!$stmt->rowCount();
         } catch (\PDOException $e) {
-            throw new UserStorageException(sprintf('Failed to save person "%s"', $person->email));
+            throw new UserStorageException(sprintf('Failed to save person "%s".', $person->email));
         }
     }
 

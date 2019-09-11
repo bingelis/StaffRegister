@@ -21,7 +21,8 @@ class Person
         }
     }
 
-    public static function create(array $properties = []) {
+    public static function create(array $properties = []): self
+    {
         $instance = new static;
 
         foreach ($properties as $name => $value) {
@@ -42,7 +43,7 @@ class Person
         return $this->{$name};
     }
 
-    public function __set($name, string $value = NULL): void
+    public function __set($name, string $value = null): void
     {
         if (!property_exists(__CLASS__, $name)) {
             throw new \DomainException(sprintf('Property %s do not exists on %s class.', $name, __CLASS__));
@@ -51,7 +52,8 @@ class Person
         $this->{$name} = $value;
     }
 
-    public function properties(): array {
+    public function properties(): array
+    {
         return get_object_vars($this);
     }
 
